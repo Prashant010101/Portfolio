@@ -20,7 +20,7 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
     >
       <h1 className="text-2xl font-bold text-accent">Prashant Jangir</h1>
-      <ul className="hidden md:flex gap-8">
+      <ul className="hidden md:flex gap-8 text-lg text-gray-300">
         {navLinks.map((link, idx) => (
           <motion.li
             key={idx}
