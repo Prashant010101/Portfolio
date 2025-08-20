@@ -5,15 +5,24 @@ const projects = [
   {
     title: "Clinic Management App",
     tech: "Electron, Node.js, ReactJS, MongoDB Atlas",
-    desc: "Offline-capable full-stack Clinic Management Desktop Software with real-time notifications and role-based access control."
+    desc: "Offline-capable full-stack Clinic Management Desktop Software with real-time notifications and role-based access control.",
+    github: [
+      {
+        label: "Frontend",
+        url: "https://github.com/Prashant010101/ClinicAPP_frontend",
+      },
+      {
+        label: "Backend",
+        url: "https://github.com/Prashant010101/ClinicAPP_backend",
+      },
+    ],
   },
   {
     title: "Offline-First React Web App",
     tech: "ReactJS, Service Workers, IndexedDB",
     desc: "Offline React app with background sync for seamless user experience.",
-    github: "https://github.com/Prashant010101/Offline-web-app"
-  }
-  
+    github: "https://github.com/Prashant010101/Offline-web-app",
+  },
 ];
 
 export default function Projects() {
@@ -33,7 +42,7 @@ export default function Projects() {
         {projects.map((p, idx) => (
           <motion.div
             key={idx}
-            className="bg-primary/40 backdrop-blur-lg p-6 rounded-lg shadow-lg border border-white/10"
+            className="bg-primary/40 p-6 rounded-lg shadow-lg border border-white/10"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -43,15 +52,33 @@ export default function Projects() {
             <h3 className="text-2xl font-semibold text-teal mb-2">{p.title}</h3>
             <p className="text-sm text-gray-300 italic">{p.tech}</p>
             <p className="mt-3 text-gray-300">{p.desc}</p>
+
+            {/* Fix: handle 'github' as either string or array */}
             {p.github && (
-              <a
-                href={p.github}
-                className="mt-4 inline-block text-teal hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View on GitHub
-              </a>
+              <div className="mt-4 flex flex-wrap gap-4">
+                {Array.isArray(p.github) ? (
+                  p.github.map((link, i) => (
+                    <a
+                      key={i}
+                      href={link.url}
+                      className="text-teal hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {link.label}
+                    </a>
+                  ))
+                ) : (
+                  <a
+                    href={p.github}
+                    className="text-teal hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub
+                  </a>
+                )}
+              </div>
             )}
           </motion.div>
         ))}
